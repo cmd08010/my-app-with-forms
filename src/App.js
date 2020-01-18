@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import "./App.css"
 
 function App() {
+  //make use state to get and set form value
+
+  const [text, setText] = useState("")
+  const [displayText, setDisplayText] = useState("")
+  const onSubmit = e => {
+    e.preventDefault()
+    setDisplayText(text)
+    //or
+    //setDisplayText(e.target["test"].value)
+  }
+
+  const handleClick = e => {
+    const value = e.target.value
+
+    setText(value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <form onSubmit={onSubmit}>
+        <input name="test" type="text" onChange={handleClick} />
+        <button type="submit">click me</button>
+        <p>{displayText || "Start Typing!"}</p>
+      </form>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
